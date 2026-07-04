@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>聊天室 - 登录</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body class="login-page">
+    <form id="loginForm" class="login-box">
+        <h1>聊天室</h1>
+        <p class="subtitle">实时 WebSocket 聊天(阶段 3)</p>
+        <input id="username" placeholder="输入用户名" required maxlength="32" autocomplete="off">
+        <button type="submit" id="loginBtn">登录</button>
+        <div id="error" class="error"></div>
+    </form>
+    <script>
+        // 登录表单提交
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value.trim();
+            if (!username) return;
+
+            const btn = document.getElementById('loginBtn');
+            const err = document.getElementById('error');
+            err.textContent = '';
+            btn.disabled = true;
+            btn.textContent = '登录中…';
+
+            try {
+                const res = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({username})
+                });
+                const data = await res.json();
+                if (data.ok) {
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('username', data.username || username);
+                    location.href = '/chat';
+                } else {
+                    err.textContent = data.error || `登录失败 (HTTP ${res.status})`;
+                }
+            } catch (e) {
+                err.textContent = '网络错误: ' + e.message;
+            } finally {
+                btn.disabled = false;
+                btn.textContent = '登录';
+            }
+        });
+    </script>
+</body>
+</html>

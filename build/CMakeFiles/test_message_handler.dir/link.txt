@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/test_message_handler.dir/tests/unit/test_message_handler.cpp.o -o test_message_handler  libchat_src.a -lpthread 

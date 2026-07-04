@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/test_room.dir/tests/unit/test_room.cpp.o -o test_room  libchat_src.a -lpthread 

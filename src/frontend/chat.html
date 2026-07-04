@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>聊天室</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="app">
+        <header class="topbar">
+            <span class="me">
+                当前用户: <strong id="me"></strong>
+                <span id="wsStatus" class="status status-disconnected">未连接</span>
+            </span>
+            <button id="logout" class="btn-logout">退出</button>
+        </header>
+
+        <div class="main">
+            <aside class="users">
+                <h3>在线用户</h3>
+                <ul id="userList"></ul>
+            </aside>
+
+            <section class="chat">
+                <div id="messages" class="messages"></div>
+                <form id="sendForm" class="input-bar">
+                    <input id="msgInput" placeholder="输入消息…(回车发送)" maxlength="500" autocomplete="off">
+                    <button type="submit" id="sendBtn">发送</button>
+                </form>
+            </section>
+        </div>
+    </div>
+
+    <script src="/app.js"></script>
+</body>
+</html>
